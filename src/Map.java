@@ -66,46 +66,51 @@ public class Map {
         this.hero = new_hero;
     }
 
-
+    
     public boolean is_wall(int row, int column){
+        boolean is_wall = false;
         for(int i = 0; i < wall.length; i++){
             if(row == wall[i][0] && column == wall[i][1]){
-                return true;
+                is_wall = true;
             }
         }
-        return false;
+        return is_wall;
     }
     public boolean is_boss(int row, int column){
+        boolean is_boss = false;
         for(int i = 0; i < boss.length; i++){
             if(row == boss[i][0] && column == boss[i][1]){
-                return true;
+                is_boss = true;
             }
         }
-        return false;
+        return is_boss;
     }
     public boolean is_chest(int row, int column){
+        boolean is_chest = false;
         for(int i = 0; i < chest.length; i++){
             if(row == chest[i][0] && column == chest[i][1]){
-                return true;
+                is_chest = true;
             }
         }
-        return false;
+        return is_chest;
     }
     public boolean is_enemy(int row, int column){
+        boolean is_enemy = false;
         for(int i = 0; i < enemy.length; i++){
             if(row == enemy[i][0] && column == enemy[i][1]){
-                return true;
+                is_enemy = true;
             }
         }
-        return false;
+        return is_enemy;
     }
     public boolean is_hero(int row, int column){
+        boolean is_hero = false;
         for(int i = 0; i < hero.length; i++){
             if(row == hero[i][0] && column == hero[i][1]){
-                return true;
+                is_hero = true;
             }
         }
-        return false;
+        return is_hero;
     }
     
     public void show_map(){

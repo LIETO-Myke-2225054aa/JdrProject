@@ -47,6 +47,10 @@ public class Chest {
 	}
 	
 	public void view_content(){
-		System.out.println("Ce coffre contient : "+ this.content.get(0).get_description());
+		System.out.println(); 
+		System.out.println("--------------------------------------------------------------------\n"+ 
+		"Ce coffre contient : "+ this.content.get(0).get_description()+"\n"+
+		"--------------------------------------------------------------------\n");
+		System.out.println();	
 	}
 }
