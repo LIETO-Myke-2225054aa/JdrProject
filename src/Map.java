@@ -1,35 +1,134 @@
-/*
-    Map donjon = new Map(map);
-    String [][] map = {
-        {"XX...B..XX"},
-        {"XX...C..XX"},
-        {"XX.A....C."},
-        {"...E......"},
-        {"..XC.XX.A."},
-        {"..E..XX..X"},
-        {"X.A....C.X"},
-        {"X...E....X"},
-        {"XXXXXCXXXX"},
-        {"XXXXXOXXXX"}
-    }; 
-*/
 public class Map {
-    private int NUM_ROWS;       
-    private int NUM_COLS;  
-    String[][] my_map = new String[NUM_ROWS][NUM_COLS];
+    private int row;
+    private int column;
+    private int[][] wall;
+    private int[][] boss;
+    private int[][] chest;
+    private int[][] enemy;
+    private int[][] hero;
 
-    public Map(String[][] map) {    //constructeur
-        for (int row = 0; row < map.length; ++row) {
-            for (int col = 0; col < map[0].length; ++col) {
-                this.my_map[row][col] = map[row][col];
-            }
-        }
+    public Map(int row, int column, int[][] wall, int[][] boss, int[][] chest, int[][] enemy, int[][] hero){
+        this.row = row;
+        this.column = column;
+        this.wall = wall;
+        this.boss = boss;
+        this.chest = chest;
+        this.enemy = enemy;
+        this.hero = hero;
     }
 
-    public void showMap(){
-        for (int row = 0; row < this.my_map.length; ++row) {
-            for (int col = 0; col < this.my_map[row].length; ++col) {
-               System.out.printf("%3d",this.my_map[row][col]);
+    public int getRow() {
+        return row;
+    }
+    public void setRow(int new_row) {
+        this.row = new_row;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+    public void setColumn(int new_column) {
+        this.column = new_column;
+    }
+
+    public int[][] getWall() {
+        return wall;
+    }
+    public void setWall(int[][] new_wall) {
+        this.wall = new_wall;
+    }
+
+    public int[][] getBoss() {
+        return boss;
+    }
+    public void setBoss(int[][] new_boss) {
+        this.boss = new_boss;
+    }
+
+    public int[][] getChest() {
+        return chest;
+    }
+    public void setChest(int[][] new_chest) {
+        this.chest = new_chest;
+    }
+
+    public int[][] getEnemy() {
+        return enemy;
+    }
+    public void setEnemy(int[][] new_enemy) {
+        this.enemy = new_enemy;
+    }
+
+    public int[][] getHero() {
+        return hero;
+    }
+    public void setHero(int[][] new_hero) {
+        this.hero = new_hero;
+    }
+
+
+    public boolean is_wall(int row, int column){
+        for(int i = 0; i < wall.length; i++){
+            if(row == wall[i][0] && column == wall[i][1]){
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean is_boss(int row, int column){
+        for(int i = 0; i < boss.length; i++){
+            if(row == boss[i][0] && column == boss[i][1]){
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean is_chest(int row, int column){
+        for(int i = 0; i < chest.length; i++){
+            if(row == chest[i][0] && column == chest[i][1]){
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean is_enemy(int row, int column){
+        for(int i = 0; i < enemy.length; i++){
+            if(row == enemy[i][0] && column == enemy[i][1]){
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean is_hero(int row, int column){
+        for(int i = 0; i < hero.length; i++){
+            if(row == hero[i][0] && column == hero[i][1]){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public void show_map(){
+        for (int i = 0; i < row; i++){
+            for (int j = 0; j < column; j++){
+                if (this.is_wall(i, j)) {
+                    System.out.print("X\t");
+                } 
+                else if (this.is_boss(i, j)){
+                    System.out.print("B\t");
+                }
+                else if (this.is_chest(i, j)){
+                    System.out.print("C\t");
+                }
+                else if (this.is_enemy(i, j)){
+                    System.out.print("E\t");
+                }
+                else if (this.is_hero(i, j)){
+                    System.out.print("O\t");
+                }
+                else {
+                    System.out.print(".\t");
+                }  
             }
             System.out.println();
         }
