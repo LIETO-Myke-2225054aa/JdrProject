@@ -2,8 +2,8 @@ import java.util.Scanner;
 import java.util.*;
 
 public class Game {
-/*###########################################-ATTRIBUTS-###########################################################################################*/
-
+/*###########################################-ATTRIBUTS-##############################################################################################*/
+    
     private Hero hero; 
     private Character boss;
     private Character enemy_1;
@@ -206,7 +206,7 @@ public class Game {
         this.gameOver = gameOver;
     }
     
-/*###########################################-METHODES-###########################################################################################*/
+/*###########################################-METHODES-################################################################################################*/
 
     public void start_game(){
         inout.start(in, hero);
@@ -216,7 +216,7 @@ public class Game {
         inout.finish();
     }   
 
-    public Character witch_enemy(int x, int y, List<Character> list_enemy){
+    public Character which_enemy(int x, int y, List<Character> list_enemy){
         Character enemy = new Character(null, null, x, y, y, y, y, x);
         for(int i = 0; i < list_enemy.size(); ++i){
             if(list_enemy.get(i).get_pos_x() == x && list_enemy.get(i).get_pos_y() == y) enemy = list_enemy.get(i);
@@ -263,7 +263,7 @@ public class Game {
                             inout.cross_chest(in, hero, chest_1);
                         }
                         else if(map.is_enemy(hero.get_pos_x(), hero.get_pos_y()) == true){ 
-                            Character enemy_x = witch_enemy(hero.get_pos_x(), hero.get_pos_y(), enemyList);
+                            Character enemy_x = which_enemy(hero.get_pos_x(), hero.get_pos_y(), enemyList);
                             inout.cross_enemy();
                             fight(hero, enemy_x, inout);
                         }
@@ -299,7 +299,7 @@ public class Game {
                             inout.cross_chest(in, hero, chest_1);
                         }
                         else if(map.is_enemy(hero.get_pos_x(), hero.get_pos_y()) == true){
-                            Character enemy = witch_enemy(hero.get_pos_x(), hero.get_pos_y(), enemyList);
+                            Character enemy = which_enemy(hero.get_pos_x(), hero.get_pos_y(), enemyList);
                             inout.cross_enemy();
                             fight(hero, enemy, inout);
                         }
@@ -335,7 +335,7 @@ public class Game {
                             inout.cross_chest(in, hero, chest_1);
                         }
                         else if(map.is_enemy(hero.get_pos_x(), hero.get_pos_y()) == true){
-                            Character enemy = witch_enemy(hero.get_pos_x(), hero.get_pos_y(), enemyList);
+                            Character enemy = which_enemy(hero.get_pos_x(), hero.get_pos_y(), enemyList);
                             inout.cross_enemy();
                             fight(hero, enemy, inout);
                         }
@@ -371,7 +371,7 @@ public class Game {
                             inout.cross_chest(in, hero, chest_1);
                         }
                         else if(map.is_enemy(hero.get_pos_x(), hero.get_pos_y()) == true){
-                            Character enemy = witch_enemy(hero.get_pos_x(), hero.get_pos_y(), enemyList);
+                            Character enemy = which_enemy(hero.get_pos_x(), hero.get_pos_y(), enemyList);
                             inout.cross_enemy();
                             fight(hero, enemy, inout);
                         }

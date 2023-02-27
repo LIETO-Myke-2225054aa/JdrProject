@@ -1,4 +1,6 @@
 public class Character {
+/*###########################################-ATTRIBUTS-################################################################################################*/
+    
     private String name;
     private String id;
     private int pos_x;
@@ -9,6 +11,7 @@ public class Character {
     private int xp;
     private boolean dead = false;
 
+/*###########################################-CONSTRUCTEUR-###########################################################################################*/
 
     public Character(String name, String id, int pos_x, int pos_y, int attack, int defense, int pv, int xp){
         this.name = name;
@@ -20,6 +23,8 @@ public class Character {
         this.pv = pv;
         this.xp = xp;
     }
+    
+/*###########################################-GETTER/SETTER-###########################################################################################*/
     
     public String get_name(){
         return name;
@@ -84,8 +89,11 @@ public class Character {
         if(this.get_pv() == 0) dead = true;
     }
     
+/*###########################################-METHODES-################################################################################################*/
+    
     public void attack(Character victim){
         int new_pv = victim.get_pv() - this.get_attack() + victim.get_defense();
         victim.set_pv(new_pv);
     }
+
 } 

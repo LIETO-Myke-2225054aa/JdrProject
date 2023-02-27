@@ -1,14 +1,20 @@
 public class Object {
+/*###########################################-ATTRIBUTS-################################################################################################*/
+
     private String id;
     private String description;
     private int power;
+
+/*###########################################-CONSTRUCTEUR-###########################################################################################*/
 
     public Object(String id, String description, int power){
         this.id = id;
         this.description = description;
         this.power = power;
     }
-    
+   
+/*###########################################-GETTER/SETTER-###########################################################################################*/
+
     public String get_id(){
         return id;
     }

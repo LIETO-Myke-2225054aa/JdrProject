@@ -1,7 +1,6 @@
 import java.util.Scanner;
 import java.util.*;
 
-
 public class Main {
     public static void main(String[] args){
     /*###########################################-ELEMENTS-###########################################################################################*/
@@ -85,7 +84,6 @@ public class Main {
         Game game_1 = new Game(hero_1, boss_1, enemy_1, enemy_2, enemy_3, enemyList, chest_1, chest_2, chest_3, chest_4, chest_5, chestList, arme_1, artefact_1, artefact_2, potion_1, potion_2, in, inout, map1);
         game_1.start_game();
   
-
     /*###########################################################################################################################################*/
     }
 }

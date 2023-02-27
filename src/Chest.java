@@ -1,15 +1,21 @@
 import java.util.*;
 
 public class Chest {
+/*###########################################-ATTRIBUTS-##############################################################################################*/
+	
 	private boolean state_content = false;
 	private List<Object> content = new ArrayList <Object>();
 	private int pos_x;
 	private int pos_y;
 	
+/*###########################################-CONSTRUCTEUR-###########################################################################################*/
+
     public Chest(int pos_x, int pos_y){
         this.pos_x = pos_x;
         this.pos_y = pos_y;
     }
+
+/*###########################################-GETTER/SETTER-###########################################################################################*/
 
 	public boolean get_state_content(){
 		return state_content;
@@ -36,6 +42,7 @@ public class Chest {
         pos_y = new_y;
     }
     
+/*###########################################-METHODES-################################################################################################*/
 
 	public void take(){
 		content.remove(0);

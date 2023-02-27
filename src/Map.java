@@ -1,4 +1,6 @@
 public class Map {
+/*###########################################-ATTRIBUTS-################################################################################################*/
+
     private int row;
     private int column;
     private int[][] wall;
@@ -6,6 +8,8 @@ public class Map {
     private int[][] chest;
     private int[][] enemy;
     private int[][] hero;
+
+/*###########################################-CONSTRUCTEUR-###########################################################################################*/
 
     public Map(int row, int column, int[][] wall, int[][] boss, int[][] chest, int[][] enemy, int[][] hero){
         this.row = row;
@@ -16,6 +20,8 @@ public class Map {
         this.enemy = enemy;
         this.hero = hero;
     }
+
+/*###########################################-GETTER/SETTER-###########################################################################################*/
 
     public int getRow() {
         return row;
@@ -66,7 +72,8 @@ public class Map {
         this.hero = new_hero;
     }
 
-    
+/*###########################################-METHODES-################################################################################################*/
+
     public boolean is_wall(int row, int column){
         boolean is_wall = false;
         for(int i = 0; i < wall.length; i++){

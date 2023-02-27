@@ -2,16 +2,22 @@ import java.util.Scanner;
 import java.util.*;
 
 public class Hero extends Character {
+/*###########################################-ATTRIBUTS-##############################################################################################*/
+
     List<Object> potion_bag = new ArrayList<Object>();
     List<Object> weapon_bag = new ArrayList<Object>();
     List<Object> actefact_bag = new ArrayList<Object>();
     private Object weapon;
     private boolean hold = false;
     
+/*###########################################-CONSTRUCTEUR-###########################################################################################*/
+
     public Hero(String name, String id, int x, int y, int attack, int defense, int pv, int xp){
         super(name, id, x,  y, attack, defense, pv, xp);
     }
     
+/*###########################################-GETTER/SETTER-###########################################################################################*/
+
     public List<Object> get_weapon_bag(){
         return weapon_bag;
     }
@@ -34,6 +40,8 @@ public class Hero extends Character {
         this.hold = new_hold;
     }
     
+/*###########################################-METHODES-################################################################################################*/
+
     public void turn_up(){      // tourner en haut
 		this.set_pos_y(this.get_pos_y() - 1);
 	}
@@ -49,52 +57,52 @@ public class Hero extends Character {
 
     public void take_object(Object object, Chest chest){ // prendre un objet d'un coffre
         String selector = object.get_id();
-       switch (selector){
-        case "Potion":
-            Object potion = new Object(object.get_id(), object.get_description(), object.get_power());
-            chest.take();                   
-            if (potion_bag.size() < 5) potion_bag.add(potion);
-            else{
-                System.out.println(); 
-                System.out.println("--------------------------------------------------------------------\n"+ 
-                "Votre sac de potion est plein, vous ne pouvez plus le remplir.\n"+
-                "--------------------------------------------------------------------\n");
-                System.out.println(); 
-            }
-        break;
-
-        case "Arme":
-            Object weapon = new Object(object.get_id(), object.get_description(), object.get_power());
-            chest.take();
-            if (weapon_bag.size() < 2) weapon_bag.add(weapon);
-            else{
-                System.out.println(); 
-                System.out.println("--------------------------------------------------------------------\n"+ 
-                "Votre sac d'arme est plein, vous ne pouvez plus le remplir.\n"+
-                "--------------------------------------------------------------------\n");
-                System.out.println(); 
-            } 
-        break;
-
-        case "Artefact":
-            Object artefact = new Object(object.get_id(), object.get_description(), object.get_power());
-            chest.take();
-            if (actefact_bag.size() < 3) actefact_bag.add(artefact);
-            else{
-                System.out.println(); 
-                System.out.println("--------------------------------------------------------------------\n"+ 
-                "Votre sac d'artefact est plein, vous ne pouvez plus le remplir.\n"+
-                "--------------------------------------------------------------------\n");
-                System.out.println(); 
-            }
-            for(int i = 0; i < actefact_bag.size(); ++i){
-                if(object.get_description() == "Pierre de pouvoir : Attaque"){
-                    this.set_attack(this.get_attack() + object.get_power());
+        switch (selector){
+            case "Potion":
+                Object potion = new Object(object.get_id(), object.get_description(), object.get_power());
+                chest.take();                   
+                if (potion_bag.size() < 5) potion_bag.add(potion);
+                else{
+                    System.out.println(); 
+                    System.out.println("--------------------------------------------------------------------\n"+ 
+                    "Votre sac de potion est plein, vous ne pouvez plus le remplir.\n"+
+                    "--------------------------------------------------------------------\n");
+                    System.out.println(); 
                 }
-                else this.set_defense(this.get_defense() + object.get_power());
+            break;
+
+            case "Arme":
+                Object weapon = new Object(object.get_id(), object.get_description(), object.get_power());
+                chest.take();
+                if (weapon_bag.size() < 2) weapon_bag.add(weapon);
+                else{
+                    System.out.println(); 
+                    System.out.println("--------------------------------------------------------------------\n"+ 
+                    "Votre sac d'arme est plein, vous ne pouvez plus le remplir.\n"+
+                    "--------------------------------------------------------------------\n");
+                    System.out.println(); 
+                } 
+            break;
+
+            case "Artefact":
+                Object artefact = new Object(object.get_id(), object.get_description(), object.get_power());
+                chest.take();
+                if (actefact_bag.size() < 3) actefact_bag.add(artefact);
+                else{
+                    System.out.println(); 
+                    System.out.println("--------------------------------------------------------------------\n"+ 
+                    "Votre sac d'artefact est plein, vous ne pouvez plus le remplir.\n"+
+                    "--------------------------------------------------------------------\n");
+                    System.out.println(); 
+                }
+                for(int i = 0; i < actefact_bag.size(); ++i){
+                    if(object.get_description() == "Pierre de pouvoir : Attaque"){
+                        this.set_attack(this.get_attack() + object.get_power());
+                    }
+                    else this.set_defense(this.get_defense() + object.get_power());
+                }
+            break;
             }
-        break;
-        }
     }
     public void file_object(Object object, Chest chest){ // deposer un objet dans un coffre
         String selector = object.get_id();
@@ -191,7 +199,12 @@ public class Hero extends Character {
         this.set_pv(get_pv() +potion_bag.get(0).get_power());
     }
     public void take_weapon(Object weapon){ //prendre une arme (dans sa main)
-        if(weapon_bag.size() != 0) weapon_bag.remove(weapon);
+        if(weapon_bag.size() != 0){
+            weapon_bag.remove(weapon);
+            set_weapon(weapon);
+            set_hold(true);
+            this.set_attack(get_attack() + weapon.get_power());
+        } 
         else{
             System.out.println(); 
             System.out.println("--------------------------------------------------------------------\n"+ 
@@ -199,9 +212,6 @@ public class Hero extends Character {
             "--------------------------------------------------------------------");
             System.out.println();
         } 
-        set_weapon(weapon);
-        set_hold(true);
-        this.set_attack(get_attack() + weapon.get_power());
     }
     public void change_weapon(Object new_weapon){   //changer d'arme (dans sa main)
         if(get_hold() == true){ 
@@ -233,7 +243,8 @@ public class Hero extends Character {
                 switch (choice_in){
                     case 1: 
                         fight_choice = true;
-                        this.attack(victim);
+                        int new_pv = victim.get_pv() - this.get_attack() + victim.get_defense();
+                        victim.set_pv(new_pv);
                     break;
 
                     case 2 :

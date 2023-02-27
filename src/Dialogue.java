@@ -1,7 +1,8 @@
 import java.util.Scanner;
 
-
 public class Dialogue {
+/*###########################################-METHODES-################################################################################################*/
+
     public void start(Scanner in, Hero hero){   //Méthode du lancement du jeu 
         boolean choiceReady = false;
         while (!choiceReady){
@@ -302,7 +303,7 @@ public class Dialogue {
                         element = in1.nextInt();
                         switch(element){
                             case 1 : 
-                                if(hero.potion_bag.size() >= 1) hero.file_object(hero.actefact_bag.get(0), chest);
+                                if(hero.potion_bag.size() >= 1) hero.file_object(hero.potion_bag.get(0), chest);
                                 else{
                                     System.out.println(); 
                                     System.out.println("--------------------------------------------------------------------\n"+ 
@@ -313,7 +314,7 @@ public class Dialogue {
                             break;
 
                             case 2 : 
-                                if(hero.potion_bag.size() >= 2) hero.file_object(hero.actefact_bag.get(1), chest);
+                                if(hero.potion_bag.size() >= 2) hero.file_object(hero.potion_bag.get(1), chest);
                                 else{
                                     System.out.println(); 
                                     System.out.println("--------------------------------------------------------------------\n"+ 
@@ -324,7 +325,7 @@ public class Dialogue {
                             break;
                             
                             case 3 : 
-                                if(hero.potion_bag.size() >= 3) hero.file_object(hero.actefact_bag.get(2), chest);
+                                if(hero.potion_bag.size() >= 3) hero.file_object(hero.potion_bag.get(2), chest);
                                 else{
                                     System.out.println(); 
                                     System.out.println("--------------------------------------------------------------------\n"+ 
@@ -335,7 +336,7 @@ public class Dialogue {
                             break;
 
                             case 4 : 
-                                if(hero.potion_bag.size() >= 4) hero.file_object(hero.actefact_bag.get(3), chest);
+                                if(hero.potion_bag.size() >= 4) hero.file_object(hero.potion_bag.get(3), chest);
                                 else{
                                     System.out.println(); 
                                     System.out.println("--------------------------------------------------------------------\n"+ 
@@ -346,7 +347,7 @@ public class Dialogue {
                             break;
 
                             case 5 : 
-                                if(hero.potion_bag.size() == 5) hero.file_object(hero.actefact_bag.get(4), chest);
+                                if(hero.potion_bag.size() == 5) hero.file_object(hero.potion_bag.get(4), chest);
                                 else{
                                     System.out.println(); 
                                     System.out.println("--------------------------------------------------------------------\n"+ 
