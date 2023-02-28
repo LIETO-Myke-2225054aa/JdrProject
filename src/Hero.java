@@ -43,7 +43,7 @@ public class Hero extends Character {
 /*###########################################-METHODES-################################################################################################*/
 
     public void turn_up(){      // tourner en haut
-		this.set_pos_y(this.get_pos_y() - 1);
+		this.set_pos_y(this.get_pos_y() - 1); 
 	}
 	public void turn_down(){    // tourner en bas
 		this.set_pos_y(this.get_pos_y() + 1);
@@ -188,7 +188,10 @@ public class Hero extends Character {
     }
     
     public void take_potion(){  //prendre (avaler) une potion
-        if(potion_bag.size() != 0) potion_bag.remove(potion_bag.get(0));
+        if(potion_bag.size() != 0) {
+            potion_bag.remove(potion_bag.get(0));
+            this.set_pv(get_pv() +potion_bag.get(0).get_power());
+        }
         else{
             System.out.println(); 
             System.out.println("--------------------------------------------------------------------\n"+ 
@@ -196,7 +199,6 @@ public class Hero extends Character {
             "--------------------------------------------------------------------");
             System.out.println();
         } 
-        this.set_pv(get_pv() +potion_bag.get(0).get_power());
     }
     public void take_weapon(Object weapon){ //prendre une arme (dans sa main)
         if(weapon_bag.size() != 0){
@@ -238,7 +240,6 @@ public class Hero extends Character {
                 "--------------------------------------------------------------------\n");
                 System.out.println();
                 int choice_in = in.nextInt();
-                in.close();
                 validInput = true;
                 switch (choice_in){
                     case 1: 

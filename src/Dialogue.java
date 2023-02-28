@@ -117,7 +117,6 @@ public class Dialogue {
                         hero.turn_up();
                         choice = true;
                         chest.view_content();
-                        System.out.println(); 
                         System.out.println("--------------------------------------------------------------------\n"+ 
                         "Voulez vous prendre l'objet ?\n"+ 
                         "1 : Oui\n"+ 
@@ -161,12 +160,11 @@ public class Dialogue {
             } while(!validInput);
         }
     }
-    public void cross_enemy(){
+    public void cross_enemy(Character enemy){
         System.out.println(); 
         System.out.println("--------------------------------------------------------------------\n"+ 
-        "Oh, il semblerait que tu sois face à un ennemi, un combat va se lancer, sois prêt !\n"+
+        "Oh, il semblerait que tu sois face à un ennemi, son nom est : "+ enemy.get_name()+"\n"+
         "--------------------------------------------------------------------\n");
-        System.out.println(); 
     }
     
     public void file_object(Scanner in, Hero hero, Chest chest){

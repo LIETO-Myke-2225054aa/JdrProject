@@ -219,7 +219,16 @@ public class Game {
     public Character which_enemy(int x, int y, List<Character> list_enemy){
         Character enemy = new Character(null, null, x, y, y, y, y, x);
         for(int i = 0; i < list_enemy.size(); ++i){
-            if(list_enemy.get(i).get_pos_x() == x && list_enemy.get(i).get_pos_y() == y) enemy = list_enemy.get(i);
+            if(list_enemy.get(i).get_pos_x() == x && list_enemy.get(i).get_pos_y() == y){
+                enemy.set_name(list_enemy.get(i).get_name());
+                enemy.set_id(list_enemy.get(i).get_id());
+                enemy.set_pos_x(list_enemy.get(i).get_pos_x());
+                enemy.set_pos_y(list_enemy.get(i).get_pos_y());
+                enemy.set_attack(list_enemy.get(i).get_attack());
+                enemy.set_defense(list_enemy.get(i).get_defense());
+                enemy.set_pv(list_enemy.get(i).get_pv());
+                enemy.set_xp(list_enemy.get(i).get_xp());
+            } 
         }
         return enemy;
     }
@@ -264,11 +273,11 @@ public class Game {
                         }
                         else if(map.is_enemy(hero.get_pos_x(), hero.get_pos_y()) == true){ 
                             Character enemy_x = which_enemy(hero.get_pos_x(), hero.get_pos_y(), enemyList);
-                            inout.cross_enemy();
+                            inout.cross_enemy(enemy_x);
                             fight(hero, enemy_x, inout);
                         }
                         else if(map.is_boss(hero.get_pos_x(), hero.get_pos_y()) == true){
-                            inout.cross_enemy();
+                            inout.cross_enemy(boss);
                             System.out.println(); 
                             System.out.println("--------------------------------------------------------------------\n"+ 
                             "Vous allez affronter un boss !\n"+
@@ -299,12 +308,12 @@ public class Game {
                             inout.cross_chest(in, hero, chest_1);
                         }
                         else if(map.is_enemy(hero.get_pos_x(), hero.get_pos_y()) == true){
-                            Character enemy = which_enemy(hero.get_pos_x(), hero.get_pos_y(), enemyList);
-                            inout.cross_enemy();
-                            fight(hero, enemy, inout);
+                            Character enemy_x = which_enemy(hero.get_pos_x(), hero.get_pos_y(), enemyList);
+                            inout.cross_enemy(enemy_x);
+                            fight(hero, enemy_x, inout);
                         }
                         else if(map.is_boss(hero.get_pos_x(), hero.get_pos_y()) == true){
-                            inout.cross_enemy();
+                            inout.cross_enemy(boss);
                             System.out.println(); 
                             System.out.println("--------------------------------------------------------------------\n"+ 
                             "Vous allez affronter un boss !\n"+
@@ -335,12 +344,12 @@ public class Game {
                             inout.cross_chest(in, hero, chest_1);
                         }
                         else if(map.is_enemy(hero.get_pos_x(), hero.get_pos_y()) == true){
-                            Character enemy = which_enemy(hero.get_pos_x(), hero.get_pos_y(), enemyList);
-                            inout.cross_enemy();
-                            fight(hero, enemy, inout);
+                            Character enemy_x = which_enemy(hero.get_pos_x(), hero.get_pos_y(), enemyList);
+                            inout.cross_enemy(enemy_x);
+                            fight(hero, enemy_x, inout);
                         }
                         else if(map.is_boss(hero.get_pos_x(), hero.get_pos_y()) == true){
-                            inout.cross_enemy();
+                            inout.cross_enemy(boss);
                             System.out.println(); 
                             System.out.println("--------------------------------------------------------------------\n"+ 
                             "Vous allez affronter un boss !\n"+
@@ -371,12 +380,12 @@ public class Game {
                             inout.cross_chest(in, hero, chest_1);
                         }
                         else if(map.is_enemy(hero.get_pos_x(), hero.get_pos_y()) == true){
-                            Character enemy = which_enemy(hero.get_pos_x(), hero.get_pos_y(), enemyList);
-                            inout.cross_enemy();
-                            fight(hero, enemy, inout);
+                            Character enemy_x = which_enemy(hero.get_pos_x(), hero.get_pos_y(), enemyList);
+                            inout.cross_enemy(enemy_x);
+                            fight(hero, enemy_x, inout);
                         }
                         else if(map.is_boss(hero.get_pos_x(), hero.get_pos_y()) == true){
-                            inout.cross_enemy();
+                            inout.cross_enemy(boss);
                             System.out.println(); 
                             System.out.println("--------------------------------------------------------------------\n"+ 
                             "Vous allez affronter un boss !\n"+
@@ -413,44 +422,55 @@ public class Game {
             fighter_1 = enemy; 
             fighter_2 = hero;   
         }
-        System.out.println();     
         System.out.println("--------------------------------------------------------------------\n"+
         "Un combat vient de se lancer, "+ fighter_1.get_name() +" va commencer !\n"+
+        "--------------------------------------------------------------------");
+        System.out.println(        
+        "Voici vos attributs :\n"+
+        "Attaque : "+ hero.get_attack() +"\n"+
+        "Defense : "+ hero.get_defense() +"\n"+
+        "Points de vie : "+ hero.get_pv() +"\n");
+        
+        System.out.println(        
+        "Voici les attributs de votre ennemi :\n"+
+        "Attaque : "+ enemy.get_attack() +"\n"+
+        "Defense : "+ enemy.get_defense() +"\n"+
+        "Points de vie : "+ enemy.get_pv() +"\n"+
         "--------------------------------------------------------------------");
         System.out.println(); 
 
         while(hero.is_dead() != true || enemy.is_dead() != true){
-            int round = 1;
-            if(round / 2 == 0){
+            int round = 0;
+            if(round % 2 == 0){
+                fighter_1.attack(fighter_2);
+                fighter_2.set_dead(); 
+            }
+            else{ 
                 fighter_2.attack(fighter_1);
                 fighter_1.set_dead();
             }
-            else{ 
-                fighter_1.attack(fighter_2);
-                fighter_2.set_dead();
-            }
             ++round;
-        }
+            System.out.println("PV Hero : "+ hero.get_pv() +"   "+"PV Ennemi : "+ enemy.get_pv());
 
-        if(hero.is_dead() == true){
-            System.out.println(); 
-            System.out.println("--------------------------------------------------------------------\n"+ 
-            "Vous avez perdu: GAME OVER\n"+
-            "--------------------------------------------------------------------\n");
-            System.out.println();             
-            gameOver = true;
-        }
+            if(hero.is_dead() == true){
+                System.out.println(); 
+                System.out.println("--------------------------------------------------------------------\n"+ 
+                "Vous avez perdu: GAME OVER\n"+
+                "--------------------------------------------------------------------\n");
+                System.out.println();             
+                gameOver = true;
+            }
 
-        else{
-            System.out.println(); 
-            System.out.println("--------------------------------------------------------------------\n"+ 
-            "Vous avez gagné le bombat !\n"+
-            "--------------------------------------------------------------------\n");
-            System.out.println();             
-            hero.set_xp(hero.get_xp() +1);
-            enemy.set_pos_x(0);
-            enemy.set_pos_y(0);
-        }
+            else{
+                System.out.println(); 
+                System.out.println("--------------------------------------------------------------------\n"+ 
+                "Vous avez gagné le bombat !\n"+
+                "--------------------------------------------------------------------\n");
+                System.out.println();             
+                hero.set_xp(hero.get_xp() +1);
+                enemy.set_pos_x(0);
+                enemy.set_pos_y(0);
+            }
+        }  
     }
-
 }

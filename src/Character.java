@@ -86,7 +86,7 @@ public class Character {
         return dead;
     }
     public void set_dead(){
-        if(this.get_pv() == 0) dead = true;
+        if(this.get_pv() <= 0) this.dead = true;
     }
     
 /*###########################################-METHODES-################################################################################################*/
@@ -95,5 +95,4 @@ public class Character {
         int new_pv = victim.get_pv() - this.get_attack() + victim.get_defense();
         victim.set_pv(new_pv);
     }
-
 } 

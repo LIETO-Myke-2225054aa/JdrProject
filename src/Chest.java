@@ -58,6 +58,5 @@ public class Chest {
 		System.out.println("--------------------------------------------------------------------\n"+ 
 		"Ce coffre contient : "+ this.content.get(0).get_description()+"\n"+
 		"--------------------------------------------------------------------\n");
-		System.out.println();	
 	}
 }

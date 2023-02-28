@@ -8,9 +8,9 @@ public class Main {
         //Personnages
         Hero hero_1 = new Hero("Player 1", "Hero", 5, 9, 10, 10, 10, 0);
         Character boss_1 = new Character("Boss", "Boss", 5, 0, 15, 15, 15, 3);
-        Character enemy_1 = new Character("Monstre 1", "Enemy", 4, 7, 10, 10, 10, 0);
-        Character enemy_2 = new Character("Monstre 2", "Enemy", 2, 5, 10, 10, 10, 1);
-        Character enemy_3 = new Character("Monstre 3", "Enemy", 3, 3, 10, 10, 10, 2);
+        Character enemy_1 = new Character("Monstre 1", "Enemy", 4, 7, 10, 5, 5, 0);
+        Character enemy_2 = new Character("Monstre 2", "Enemy", 2, 5, 10, 10, 5, 1);
+        Character enemy_3 = new Character("Monstre 3", "Enemy", 3, 3, 10, 10, 5, 2);
         List<Character> enemyList = new ArrayList<Character>();
         enemyList.add(enemy_1);
         enemyList.add(enemy_2);
