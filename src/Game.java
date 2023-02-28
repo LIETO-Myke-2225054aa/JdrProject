@@ -232,7 +232,19 @@ public class Game {
         }
         return enemy;
     }
-    
+    public Chest which_chest(int x, int y, List<Chest> list_chest){
+        Chest chest = new Chest(x, y);
+        for(int i = 0; i < list_chest.size(); ++i){
+            if(list_chest.get(i).get_pos_x() == x && list_chest.get(i).get_pos_y() == y){
+                chest.set_state_content(list_chest.get(i).get_state_content());
+                chest.set_pos_x(list_chest.get(i).get_pos_x());
+                chest.set_pos_x(list_chest.get(i).get_pos_y());
+                chest.file(list_chest.get(i).get_content());
+            } 
+        }
+        return chest;
+    }
+
     public void player_move(Scanner in, Hero hero){    //Faire bouger le joueur
         boolean choiceMove = false;
         while(!choiceMove){
@@ -254,7 +266,7 @@ public class Game {
                 switch(move){
                     case 1: 
                         choiceMove = true;
-                        if(map.is_wall(hero.get_pos_x(), hero.get_pos_y() + 1) == true){
+                        if(map.is_wall(hero.get_pos_x(), hero.get_pos_y() - 1) == true){
                             System.out.println(); 
                             System.out.println("--------------------------------------------------------------------\n"+ 
                             "Vous êtes face à un mur, veuillez choisir : Gauche, Droite ou Bas\n"+
@@ -269,7 +281,8 @@ public class Game {
                         "--------------------------------------------------------------------");
                         System.out.println(); 
                         if(map.is_chest(hero.get_pos_x(), hero.get_pos_y()) == true){
-                            inout.cross_chest(in, hero, chest_1);
+                            Chest chest_random = which_chest(hero.get_pos_x(), hero.get_pos_y(), chestList);
+                            inout.cross_chest(in, hero, chest_random);
                         }
                         else if(map.is_enemy(hero.get_pos_x(), hero.get_pos_y()) == true){ 
                             Character enemy_x = which_enemy(hero.get_pos_x(), hero.get_pos_y(), enemyList);
@@ -290,7 +303,7 @@ public class Game {
 
                     case 2: 
                         choiceMove = true;
-                        if(map.is_wall(hero.get_pos_x(), hero.get_pos_y() - 1) == true){
+                        if(map.is_wall(hero.get_pos_x(), hero.get_pos_y() + 1) == true){
                             System.out.println(); 
                             System.out.println("--------------------------------------------------------------------\n"+ 
                             "Vous êtes face à un mur, veuillez choisir : Gauche, Droite ou Haut\n"+
@@ -305,7 +318,8 @@ public class Game {
                         "--------------------------------------------------------------------");
                         System.out.println();
                         if(map.is_chest(hero.get_pos_x(), hero.get_pos_y()) == true){
-                            inout.cross_chest(in, hero, chest_1);
+                            Chest chest_random = which_chest(hero.get_pos_x(), hero.get_pos_y(), chestList);
+                            inout.cross_chest(in, hero, chest_random);
                         }
                         else if(map.is_enemy(hero.get_pos_x(), hero.get_pos_y()) == true){
                             Character enemy_x = which_enemy(hero.get_pos_x(), hero.get_pos_y(), enemyList);
@@ -332,7 +346,7 @@ public class Game {
                             "Vous êtes face à un mur, veuillez choisir : Droite, Haut ou Bas\n"+
                             "--------------------------------------------------------------------\n");
                             System.out.println(); 
-                             break;
+                            break;
                         }
                         hero.turn_left();
                         System.out.println(); 
@@ -341,8 +355,9 @@ public class Game {
                         "--------------------------------------------------------------------");
                         System.out.println();
                         if(map.is_chest(hero.get_pos_x(), hero.get_pos_y()) == true){
-                            inout.cross_chest(in, hero, chest_1);
-                        }
+                            Chest chest_random = which_chest(hero.get_pos_x(), hero.get_pos_y(), chestList);
+                            inout.cross_chest(in, hero, chest_random);
+                        }                     
                         else if(map.is_enemy(hero.get_pos_x(), hero.get_pos_y()) == true){
                             Character enemy_x = which_enemy(hero.get_pos_x(), hero.get_pos_y(), enemyList);
                             inout.cross_enemy(enemy_x);
@@ -377,7 +392,8 @@ public class Game {
                         "--------------------------------------------------------------------");
                         System.out.println();
                         if(map.is_chest(hero.get_pos_x(), hero.get_pos_y()) == true){
-                            inout.cross_chest(in, hero, chest_1);
+                            Chest chest_random = which_chest(hero.get_pos_x(), hero.get_pos_y(), chestList);
+                            inout.cross_chest(in, hero, chest_random);
                         }
                         else if(map.is_enemy(hero.get_pos_x(), hero.get_pos_y()) == true){
                             Character enemy_x = which_enemy(hero.get_pos_x(), hero.get_pos_y(), enemyList);
@@ -438,38 +454,44 @@ public class Game {
         "Points de vie : "+ enemy.get_pv() +"\n"+
         "--------------------------------------------------------------------");
         System.out.println(); 
-
-        while(hero.is_dead() != true || enemy.is_dead() != true){
-            int round = 0;
+        
+        int round = 0;
+        while((hero.is_dead() == false) || (enemy.is_dead() == false)){
+            System.out.println("round : "+round);
             if(round % 2 == 0){
+                System.out.println("C'est le tour de "+ fighter_1.get_name());
                 fighter_1.attack(fighter_2);
-                fighter_2.set_dead(); 
             }
-            else{ 
+            else{
+                System.out.println("C'est le tour de "+ fighter_2.get_name()); 
                 fighter_2.attack(fighter_1);
-                fighter_1.set_dead();
             }
             ++round;
+            System.out.println();
             System.out.println("PV Hero : "+ hero.get_pv() +"   "+"PV Ennemi : "+ enemy.get_pv());
-
+            fighter_1.set_dead();
+            fighter_2.set_dead(); 
             if(hero.is_dead() == true){
                 System.out.println(); 
                 System.out.println("--------------------------------------------------------------------\n"+ 
                 "Vous avez perdu: GAME OVER\n"+
                 "--------------------------------------------------------------------\n");
-                System.out.println();             
+                System.out.println();
+                fighter_1.set_dead();             
                 gameOver = true;
+                break;
             }
-
-            else{
+    
+            else if (enemy.is_dead() == true){
                 System.out.println(); 
                 System.out.println("--------------------------------------------------------------------\n"+ 
-                "Vous avez gagné le bombat !\n"+
+                "Bravo, vous avez gagné le bombat !\n"+
                 "--------------------------------------------------------------------\n");
                 System.out.println();             
                 hero.set_xp(hero.get_xp() +1);
                 enemy.set_pos_x(0);
                 enemy.set_pos_y(0);
+                break;
             }
         }  
     }

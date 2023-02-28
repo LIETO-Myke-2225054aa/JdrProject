@@ -114,7 +114,6 @@ public class Dialogue {
                 validInput = true;
                 switch(variable_in){
                     case 1: 
-                        hero.turn_up();
                         choice = true;
                         chest.view_content();
                         System.out.println("--------------------------------------------------------------------\n"+ 

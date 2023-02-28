@@ -17,11 +17,11 @@ public class Main {
         enemyList.add(enemy_3);
         
         //Coffres
-        Chest chest_1 = new Chest(5, 1);
-        Chest chest_2 = new Chest(8, 2);
+        Chest chest_1 = new Chest(5, 8);
+        Chest chest_2 = new Chest(7, 6);
         Chest chest_3 = new Chest(3, 4);
-        Chest chest_4 = new Chest(7, 6);
-        Chest chest_5 = new Chest(5, 8);
+        Chest chest_4 = new Chest(8, 2);
+        Chest chest_5 = new Chest(5, 1);
         List<Chest> chestList = new ArrayList<Chest>();
         chestList.add(chest_1);
         chestList.add(chest_2);
